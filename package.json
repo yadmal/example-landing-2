@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/yadmal/example-landing-2/issues"
   },
-  "homepage": "https://github.com/yadmal/example-landing-2#readme"
+  "homepage": "https://github.com/yadmal/example-landing-2#readme",
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
 }
