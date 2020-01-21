@@ -7,13 +7,15 @@ const browserSync = require('browser-sync').create();
 const sourcemaps = require('gulp-sourcemaps');
 const gulpif = require('gulp-if');
 const gcmq = require('gulp-group-css-media-queries');
+const less = require('gulp-less');
 
-const isDev = true;
+const isDev = false;
 const isProd = !isDev;
 
 function styles(){
-  return gulp.src('./src/preCss/**/*.css')
+  return gulp.src('./src/preCss/styles.less')
   .pipe(gulpif(isDev, sourcemaps.init()))
+  .pipe(less())
   .pipe(concat('style.css'))
   .pipe(gcmq())
   .pipe(autoprefixer({
