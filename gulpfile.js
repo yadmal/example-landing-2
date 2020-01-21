@@ -5,17 +5,23 @@ const cleanCss = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
 const sourcemaps = require('gulp-sourcemaps');
+const gulpif = require('gulp-if');
+const gcmq = require('gulp-group-css-media-queries');
+
+const isDev = true;
+const isProd = !isDev;
 
 function styles(){
   return gulp.src('./src/preCss/**/*.css')
-  .pipe(sourcemaps.init())
+  .pipe(gulpif(isDev, sourcemaps.init()))
   .pipe(concat('style.css'))
+  .pipe(gcmq())
   .pipe(autoprefixer({
     overrideBrowserslist:['>0.1%'],
     cascade:false
   }))
-  .pipe(cleanCss({level:2}))
-  .pipe(sourcemaps.write())
+  .pipe(gulpif(isProd, cleanCss({level:2})))
+  .pipe(gulpif(isDev, sourcemaps.write()))
   .pipe(gulp.dest('./build/css'))
   .pipe(browserSync.stream());
 
