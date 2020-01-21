@@ -4,15 +4,18 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleanCss = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
+const sourcemaps = require('gulp-sourcemaps');
 
 function styles(){
   return gulp.src('./src/preCss/**/*.css')
+  .pipe(sourcemaps.init())
   .pipe(concat('style.css'))
   .pipe(autoprefixer({
     overrideBrowserslist:['>0.1%'],
     cascade:false
   }))
   .pipe(cleanCss({level:2}))
+  .pipe(sourcemaps.write())
   .pipe(gulp.dest('./build/css'))
   .pipe(browserSync.stream());
 
