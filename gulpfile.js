@@ -22,5 +22,11 @@ function scripts(){
   .pipe(gulp.dest('./build/js'));
 }
 
+function watch(){
+  gulp.watch('./src/preCss/**/*.css', styles);
+  gulp.watch('./src/preJs/**/*.js', scripts);
+}
+
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
+gulp.task('watch', watch);
