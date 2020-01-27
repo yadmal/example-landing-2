@@ -9,7 +9,7 @@ const gulpif = require('gulp-if');
 const gcmq = require('gulp-group-css-media-queries');
 const less = require('gulp-less');
 
-const isDev = false;
+const isDev = true;
 const isProd = !isDev;
 
 function styles(){
@@ -43,7 +43,7 @@ function watch(){
       basedir: "./"
     }
   });
-  gulp.watch('./src/preCss/**/*.css', styles);
+  gulp.watch('./src/preCss/**/*.less', styles);
   gulp.watch('./src/preJs/**/*.js', scripts);
   gulp.watch('./*.html').on('change', browserSync.reload);
 }
@@ -51,5 +51,5 @@ function watch(){
 gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 gulp.task('watch', watch);
-gulp.task('build', gulp.series(gulp.parallel(styles, scripts)));
+gulp.task('build', gulp.parallel(styles, scripts));
 gulp.task('dev', gulp.series('build', 'watch'));
